@@ -6,7 +6,7 @@ module.exports = (s, isFile) => new Promise((resolve, reject) => {
     {stdio: 'ignore'},
     (e, stdout, stderr) => {
       if (e) return reject(e);
-      if (stderr) return reject(new Error(stderr));
+      if (stderr) return reject(stderr);
       resolve(stdout.trim());
     }
   );

@@ -1,4 +1,3 @@
-const ErrorManager = require('./error-manager');
 let cache = {};
 module.exports = {
   get (service, username) {
@@ -8,12 +7,7 @@ module.exports = {
         password: cache[service][username]
       });
     }
-    return Promise.reject(
-      ErrorManager.create(
-        'GET_FAILURE',
-        `Could not find ${service} password for ${username}.`
-      )
-    );
+    return Promise.reject(new Error(`Could not find ${service} password for ${username}.`));
   },
   set (service, username, password) {
     cache[service] = cache[service] || {};
