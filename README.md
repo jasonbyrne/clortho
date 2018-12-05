@@ -14,17 +14,17 @@ const clortho = require('clortho-lite').clortho;
 
 let service = clortho('Whatever Name of Your Service');
 
-service.saveToKeychain('some-user-name', 'some-password')
-    .then(function (value) {
-        console.log(value);
+service.set('some-user-name', 'some-password')
+    .then(function (credentials) {
+        console.log(credentials);
     })
     .catch(function (err) {
         console.log(err);
     });
 
-service.getFromKeychain('some-user-name')
-    .then(function (value) {
-        console.log(value);
+service.get('some-user-name')
+    .then(function (credentials) {
+        console.log(credentials);
     })
     .catch(function (err) {
         console.log(err);

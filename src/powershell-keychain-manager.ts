@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { jsStringEscape } from 'js-string-escape';
 import { runPowershell } from './run-powershell';
-import { iKeyChain, iCredentials } from './osx-keychain-manager';
+import { iKeyChain, iCredentials } from '.';
 
 const credManPath = path.resolve(__dirname, '../CredMan.ps1');
 const runCredMan = (cmd, opts) =>
@@ -31,7 +31,7 @@ export class PowershellKeychainManager implements iKeyChain {
             if (!pwl) {
                 throw new Error(`Unknown error finding ${service} password for ${account}.`);
             }
-            return { username: account, password: pwl.match(passwordLineRE)[1] };
+            return { account: account, password: pwl.match(passwordLineRE)[1] };
         });
     }
 
@@ -47,7 +47,7 @@ export class PowershellKeychainManager implements iKeyChain {
             if (res.indexOf('Successfully') !== 0) {
                 throw new Error('Unknown error saving to keychain');
             }
-            return { username: account, password: password };
+            return { account: account, password: password };
         })
     }
 

@@ -1,15 +1,6 @@
+import { iKeyChain, iCredentials } from '.';
+
 const keychain = require('keychain');
-
-export interface iKeyChain {
-    get(service: string, account: string): Promise<iCredentials>
-    set(service: string, account: string, password: string): Promise<iCredentials>
-    remove(service: string, account: string): Promise<any>
-}
-
-export interface iCredentials {
-    username: string
-    password: string
-}
 
 export class OSX_Keychain implements iKeyChain {
 
@@ -19,7 +10,7 @@ export class OSX_Keychain implements iKeyChain {
                 if (err) {
                     return reject(err.message);
                 }
-                return resolve({ username: account, password });
+                return resolve({ account: account, password: password });
             });
         });
     }
@@ -30,7 +21,7 @@ export class OSX_Keychain implements iKeyChain {
                 if (err) {
                     return reject(err.message);
                 }
-                return resolve({ username: account, password });
+                return resolve({ account: account, password: password });
             });
         });
     }
