@@ -1,6 +1,7 @@
 import { keychain } from './keychain-access';
+import { iCredentials } from './osx-keychain-manager';
 
-class ClorthoService {
+export class ClorthoService {
 
     protected serviceName: string
 
@@ -8,28 +9,20 @@ class ClorthoService {
         this.serviceName = serviceName;
     }
 
-    public getFromKeychain (username: string) {
+    public getFromKeychain (username: string): Promise<iCredentials> {
         return keychain.get(this.serviceName, username);
     }
 
-    public saveToKeychain (username: string, password: string) {
+    public saveToKeychain (username: string, password: string): Promise<iCredentials> {
         return keychain.set(this.serviceName, username, password);
     }
 
-    public trySaveToKeychain (credential) {
-        return keychain.set(this.serviceName, credential.username, credential.password)
-        .then(
-            () => credential,
-            () => credential
-        );
-    }
-
-    public removeFromKeychain (username: string) {
+    public removeFromKeychain (username: string): Promise<any> {
         return keychain.remove(this.serviceName, username);
     }
 
 }
 
-export const clortho = function (serviceName: string) {
+export const clortho = function (serviceName: string): ClorthoService {
     return new ClorthoService(serviceName);
 }
