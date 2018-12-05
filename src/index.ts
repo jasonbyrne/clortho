@@ -11,7 +11,7 @@ export interface iCredentials {
     password: string
 }
 
-export class ClorthoService {
+export class ClorthoService implements iKeyChain {
 
     protected serviceName: string
 
