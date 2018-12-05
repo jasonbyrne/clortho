@@ -1,4 +1,4 @@
-const clortho = require('../src/index');
+const clortho = require('../dist/index.js').clortho;
 
 let service = clortho('Clortho');
 
