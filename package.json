@@ -1,8 +1,8 @@
 {
   "name": "clortho-lite",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Abstraction layer over the OS appropriate keychain or password manager.",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "tsc"
